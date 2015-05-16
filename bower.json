@@ -1,0 +1,19 @@
+{
+  "name": "css3-carousel",
+  "version": "0.0.1",
+  "authors": [
+    "Tien Nguyen <nqtien310@gmail.com>"
+  ],
+  "description": "Carousel with pure CSS3 to greatly boost performance",
+  "main": "dist/carousel.js",
+  "keywords": [
+    "Carousel",
+    "CSS3"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/nqtien310",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.17"
+  }
+}
