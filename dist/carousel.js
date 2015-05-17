@@ -1,4 +1,4 @@
-define(["jquery"], function(){
+(function(){
   "use strict";
 
   $.fn.nextOrFirst = function(selector){
@@ -6,12 +6,15 @@ define(["jquery"], function(){
     return (next.length) ? next : this.prevAll(selector).last();
   }
 
-  var Carousel = function(opts){
-    this.container  = opts.container
-    this.delayInSec = opts.delayInSec
-    this.direction  = opts.direction
-    this.dots       = opts.dots
-    this.$container = $(this.container)
+  $.fn.carousel = function(opts) {
+    new Carousel(opts, this).start()
+  }
+
+  var Carousel = function(opts, $container){
+    this.delayInSec = opts.delayInSec || 1
+    this.direction  = opts.direction || "left"
+    this.dots       = !!opts.dots
+    this.$container = $container
     this.$children  = this.$container.find(" > div")
   }
 
@@ -110,7 +113,4 @@ define(["jquery"], function(){
       return "moved-" + self.direction
     }
   }
-
-  return Carousel;
-})
-
+})()

@@ -13,7 +13,6 @@
   "license": "MIT",
   "homepage": "http://github.com/nqtien310",
   "dependencies": {
-    "jquery": "~2.1.4",
-    "requirejs": "~2.1.17"
+    "jquery": "~2.1.4"
   }
 }
