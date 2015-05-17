@@ -54,9 +54,34 @@
         background: blue;
       }
 
-      .animation {
+      .carousel-animation {
         transition-property: left, right, top, bottom;
         transition-duration: 1s;
+      }
+
+      .carousel-dots {
+        display: block;
+        position: absolute;
+        z-index: 3;
+        width: calc(100% - 10px);
+        bottom: 0;
+        height: 10px;
+        padding: 20 10px 20px 0;
+        text-align: right;
+      }
+
+      .carousel-dot {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 20px;
+        margin: 0 2px;
+        cursor: pointer;
+      }
+
+      .carousel-dot-active {
+        background: red;
       }
     </style>
   </head>
@@ -78,8 +103,9 @@
         require(["carousel"], function(Carousel){
           new Carousel({
             container: "#carousel",
-            delayInSec: 2,
-            direction: "random"
+            delayInSec: 3,
+            direction: "random",
+            dots: true
           }).start()
         })
       })
