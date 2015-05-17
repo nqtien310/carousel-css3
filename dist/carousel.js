@@ -16,49 +16,54 @@ define(["jquery"], function(){
   }
 
   Carousel.prototype.start = function(){
-    this.$children.first().addClass("carousel-active")
-    if(this.dots) {
-      this.displayDots()
-      this.bindEvents()
-    }
+    var self = this
 
-    this.resetTimeout()
+    self.$children.first().addClass("carousel-active")
+    if(self.dots) {
+      self.displayDots()
+      self.bindEvents()
+    }
+    self.resetSliding()
   }
 
-  Carousel.prototype.resetTimeout = function(){
+  Carousel.prototype.resetSliding = function(){
     var self = this
-    clearTimeout(this.slideTimeout)
-    this.slideTimeout = setTimeout(function(){
+
+    clearTimeout(self.slideTimeout)
+    self.slideTimeout = setTimeout(function(){
       self.slide()
-      self.resetTimeout()
-    }, this.delayInSec * 1010 );
+      self.resetSliding()
+    }, self.delayInSec * 1111 );
   }
 
   Carousel.prototype.displayDots = function(){
+    var self = this
+
     var $dots = $("<span class='carousel-dots'/>")
-    this.$container.append($dots)
-    for(var i=0; i<this.$children.length; i++){
+    self.$container.append($dots)
+    for(var i=0; i<self.$children.length; i++)
       $dots.append("<div class='carousel-dot'/>")
-    }
   }
 
   Carousel.prototype.bindEvents = function(){
     var self = this;
-    this.$container.on("click", ".carousel-dot", function(e){
-      var index = $(e.currentTarget).index()
-      self.slideToIndex(index)
+
+    self.$container.on("click", ".carousel-dot", function(e){
+      self.slideToIndex($(e.currentTarget).index())
     })
   }
 
   Carousel.prototype.slide = function($nextActiveChild){
-    var $activeChild = this.$container.find(".carousel-active")
+    var self = this
+
+    var $activeChild = self.$container.find(".carousel-active")
     var $nextActiveChild = $nextActiveChild ? $nextActiveChild : $activeChild.nextOrFirst("div")
-    var className = this.getDirectionClass()
+    var className = self.getDirectionClass()
     $activeChild.addClass("carousel-animation " + className)
     $nextActiveChild.addClass("carousel-next-active")
 
-    if(this.dots)
-      this.highlightDots($nextActiveChild.index())
+    if(self.dots)
+      self.highlightDots($nextActiveChild.index())
 
     setTimeout(function(){
       $activeChild.removeClass("carousel-animation carousel-active " + className)
@@ -67,25 +72,42 @@ define(["jquery"], function(){
   }
 
   Carousel.prototype.highlightDots = function(index){
-    this.$container.find(".carousel-dot").removeClass("carousel-dot-active")
-    this.$container.find(".carousel-dot").eq(index).addClass("carousel-dot-active")
+    var self = this
+
+    self.$container.find(".carousel-dot").removeClass("carousel-dot-active")
+    self.$container.find(".carousel-dot").eq(index).addClass("carousel-dot-active")
   }
 
   Carousel.prototype.slideToIndex = function(index){
-    if(this.$container.find(".carousel-active").index() == index ||
-      this.$container.find(".carousel-animation").length)
+    var self = this
+
+    if(self.isAnimating() || this.beingActive(index))
       return
 
-    var $nextActiveChild = this.$children.eq(index)
-    this.slide($nextActiveChild)
-    this.resetTimeout()
+    var $nextActiveChild = self.$children.eq(index)
+    self.slide($nextActiveChild)
+    self.resetSliding()
+  }
+
+  Carousel.prototype.isAnimating = function() {
+    var self = this
+
+    return self.$container.find(".carousel-animation").length
+  }
+
+  Carousel.prototype.beingActive = function(index) {
+    var self = this
+
+    return self.$container.find(".carousel-active").index() == index
   }
 
   Carousel.prototype.getDirectionClass = function(){
-    if(this.direction == "random"){
+    var self = this
+
+    if(self.direction == "random"){
       return "moved-" + ["left", "right", "top", "bottom"][Math.floor(Math.random() * 4)]
     }else{
-      return "moved-" + this.direction
+      return "moved-" + self.direction
     }
   }
 
