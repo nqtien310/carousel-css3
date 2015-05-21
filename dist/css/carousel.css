@@ -1,0 +1,63 @@
+.carousel-container > div{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.carousel-container .carousel-active {
+  z-index: 2;
+}
+
+.carousel-container .carousel-next-active {
+  z-index: 1;
+}
+
+.carousel-container .moved-left {
+  left: -100%;
+}
+
+.carousel-container .moved-right {
+  left: 100%;
+}
+
+.carousel-container .moved-top {
+  top: -100%;
+}
+
+.carousel-container .moved-bottom {
+  top: 100%;
+}
+
+
+.carousel-animation {
+  transition-property: left, right, top, bottom;
+  transition-duration: 1s;
+}
+
+.carousel-dots {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  width: calc(100% - 10px);
+  bottom: 0;
+  height: 10px;
+  padding: 20 10px 20px 0;
+  text-align: right;
+}
+
+.carousel-dot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 20px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.carousel-dot-active {
+  background: red;
+}

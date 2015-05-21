@@ -36,7 +36,7 @@
     self.slideTimeout = setTimeout(function(){
       self.slide()
       self.resetSliding()
-    }, self.delayInSec * 1111 );
+    }, (1 + self.delayInSec) * 1111 );
   }
 
   Carousel.prototype.displayDots = function(){
