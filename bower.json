@@ -9,6 +9,10 @@
     "dist/js/carousel.js",
     "dist/css/carousel.css"
   ],
+  "ignore": [
+    "bower_components",
+    "examples"
+  ],
   "keywords": [
     "Carousel",
     "CSS3"
