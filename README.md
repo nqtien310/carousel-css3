@@ -3,7 +3,7 @@
 Example: 
 # HTML
 ````
-<div id="carousel_container">
+<div id="carousel_container" class="carousel-container">
     <div id="slide_1"></div>
     <div id="slide_2"></div>
     <div id="slide_3"></div>
